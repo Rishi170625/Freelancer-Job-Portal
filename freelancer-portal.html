@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freelancer — Work. Anywhere.</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<script src="freelancer.js" defer></script>
+<link rel="stylesheet" href="freelancer.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="logo" onclick="showPage('home')">freelancer<span class="logo-dot">.</span></div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('browse');return false;">Find Work</a></li>
+    <li><a href="#" onclick="openModal('signup');return false;">Hire Talent</a></li>
+    <li><a href="#">Enterprise</a></li>
+    <li><a href="#">Resources</a></li>
+  </ul>
+  <div class="nav-actions" id="navActions">
+    <button class="btn-ghost" onclick="openModal('login')">Log In</button>
+    <button class="btn-primary" onclick="openModal('signup')">Get Started</button>
+  </div>
+</nav>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login')">✕</button>
+    <div class="modal-logo-text">freelancer<span style="-webkit-text-fill-color:var(--muted);font-weight:400">.</span></div>
+    <h2>Welcome back</h2>
+    <p class="modal-sub">Log in to continue to your account</p>
+    <div class="social-login">
+      <button onclick="window.open('https://accounts.google.com','_blank')">🔵 Google</button>
+      <button onclick="window.open('https://github.com/login','_blank')">⚫ GitHub</button>
+      <button onclick="window.open('https://www.linkedin.com/login','_blank')">🔷 LinkedIn</button>
+    </div>
+    <div class="form-divider"><span>or continue with email</span></div>
+    <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com" id="loginEmail"></div>
+    <div class="form-group">
+      <label>Password <a href="#" style="float:right;color:var(--accent2);font-size:.76rem;cursor:none;">Forgot?</a></label>
+      <input type="password" placeholder="••••••••" id="loginPass">
+    </div>
+    <button class="form-btn" onclick="doLogin()">Log In →</button>
+    <div class="modal-switch">No account? <a href="#" onclick="switchModal('login','signup');return false;">Sign up free</a></div>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="signupModal">
+  <div class="modal" style="max-width:500px;">
+    <button class="modal-close" onclick="closeModal('signup')">✕</button>
+    <div class="modal-logo-text">freelancer<span style="-webkit-text-fill-color:var(--muted);font-weight:400">.</span></div>
+    <h2>Create your account</h2>
+    <p class="modal-sub">Join 2.4M+ professionals worldwide — it's free</p>
+    <div class="social-login">
+      <button onclick="window.open('https://accounts.google.com','_blank')">🔵 Google</button>
+      <button onclick="window.open('https://github.com/signup','_blank')">⚫ GitHub</button>
+    </div>
+    <div class="form-divider"><span>or sign up with email</span></div>
+    <div class="form-row">
+      <div class="form-group"><label>First Name</label><input type="text" placeholder="Alex"></div>
+      <div class="form-group"><label>Last Name</label><input type="text" placeholder="Rivera"></div>
+    </div>
+    <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
+    <div class="form-group"><label>Password</label><input type="password" placeholder="Min. 8 characters"></div>
+    <div class="form-group"><label>I want to…</label>
+      <select>
+        <option>Find freelance work</option>
+        <option>Hire talented freelancers</option>
+        <option>Both — hire and work</option>
+      </select>
+    </div>
+    <button class="form-btn" onclick="doSignup()">Create Account →</button>
+    <div class="modal-switch">Have an account? <a href="#" onclick="switchModal('signup','login');return false;">Log in</a></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon">✅</div>
+  <div><div class="toast-title" id="toastTitle">Done!</div><div class="toast-sub" id="toastSub">Action completed.</div></div>
+</div>
+
+<!-- ========== PAGE: HOME ========== -->
+<div class="page active" id="page-home">
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span class="dot">●</span>2.4M+ Active Freelancers</span>
+      <span class="ticker-item"><span class="dot">●</span>$2.5B+ Jobs Posted</span>
+      <span class="ticker-item"><span class="dot">●</span>Trusted by 50,000+ Companies</span>
+      <span class="ticker-item"><span class="dot">●</span>190+ Countries Represented</span>
+      <span class="ticker-item"><span class="dot">●</span>Avg. Project Matched in 24 Hours</span>
+      <span class="ticker-item"><span class="dot">●</span>98% Client Satisfaction Rate</span>
+      <span class="ticker-item"><span class="dot">●</span>2.4M+ Active Freelancers</span>
+      <span class="ticker-item"><span class="dot">●</span>$2.5B+ Jobs Posted</span>
+      <span class="ticker-item"><span class="dot">●</span>Trusted by 50,000+ Companies</span>
+      <span class="ticker-item"><span class="dot">●</span>190+ Countries Represented</span>
+      <span class="ticker-item"><span class="dot">●</span>Avg. Project Matched in 24 Hours</span>
+      <span class="ticker-item"><span class="dot">●</span>98% Client Satisfaction Rate</span>
+    </div>
+  </div>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-tag"><span class="blink"></span>#1 Freelance Marketplace Worldwide</div>
+    <h1>Work Without<br><span class="line2">Boundaries.</span></h1>
+    <p class="hero-sub">Connect with world-class talent or find your next dream project. Millions of opportunities, one platform.</p>
+    <div class="search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7a7a8c" stroke-width="2" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search jobs, skills, or companies…" id="heroSearch" style="margin-left:10px;" onkeydown="if(event.key==='Enter')doHeroSearch()">
+      <div class="search-divider"></div>
+      <select class="search-cat" id="heroCat">
+        <option value="">All Categories</option>
+        <option>Development & IT</option>
+        <option>Design & Creative</option>
+        <option>Writing & Translation</option>
+        <option>Digital Marketing</option>
+        <option>Data Science & ML</option>
+        <option>Video & Animation</option>
+      </select>
+      <button class="search-btn" onclick="doHeroSearch()">🔍 Search Jobs</button>
+    </div>
+    <div class="hero-tags">
+      <span onclick="qs('UI/UX Design')">UI/UX Design</span>
+      <span onclick="qs('React Developer')">React Developer</span>
+      <span onclick="qs('Content Writing')">Content Writing</span>
+      <span onclick="qs('Machine Learning')">Machine Learning</span>
+      <span onclick="qs('Video Editing')">Video Editing</span>
+      <span onclick="qs('Data Analysis')">Data Analysis</span>
+      <span onclick="qs('SEO Expert')">SEO Expert</span>
+    </div>
+  </section>
+  <div class="stats reveal">
+    <div class="stat"><div class="stat-num">2.4M+</div><div class="stat-label">Skilled Freelancers</div></div>
+    <div class="stat"><div class="stat-num">870K+</div><div class="stat-label">Active Projects</div></div>
+    <div class="stat"><div class="stat-num">$2.5B</div><div class="stat-label">Total Paid Out</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Satisfaction Rate</div></div>
+    <div class="stat"><div class="stat-num">190+</div><div class="stat-label">Countries</div></div>
+  </div>
+  <section class="content-section reveal">
+    <div class="section-header">
+      <div><div class="section-label">Explore</div><div class="section-title">Browse by Category</div><p class="section-sub">Find work in your expertise — from code to creativity.</p></div>
+      <a href="#" class="view-all" onclick="showPage('categories');return false;">View All Categories →</a>
+    </div>
+    <div class="categories-grid">
+      <div class="cat-card" onclick="bc('Development & IT')"><div class="cat-icon" style="background:rgba(0,229,160,.1)">💻</div><div class="cat-name">Development & IT</div><div class="cat-count">142,830 jobs</div></div>
+      <div class="cat-card" onclick="bc('Design & Creative')"><div class="cat-icon" style="background:rgba(108,99,255,.1)">🎨</div><div class="cat-name">Design & Creative</div><div class="cat-count">98,450 jobs</div></div>
+      <div class="cat-card" onclick="bc('Writing & Translation')"><div class="cat-icon" style="background:rgba(255,107,107,.1)">✍️</div><div class="cat-name">Writing & Translation</div><div class="cat-count">67,200 jobs</div></div>
+      <div class="cat-card" onclick="bc('Digital Marketing')"><div class="cat-icon" style="background:rgba(255,209,102,.1)">📱</div><div class="cat-name">Digital Marketing</div><div class="cat-count">54,110 jobs</div></div>
+      <div class="cat-card" onclick="bc('Video & Animation')"><div class="cat-icon" style="background:rgba(0,229,160,.1)">🎬</div><div class="cat-name">Video & Animation</div><div class="cat-count">43,780 jobs</div></div>
+      <div class="cat-card" onclick="bc('Data Science & ML')"><div class="cat-icon" style="background:rgba(108,99,255,.1)">📊</div><div class="cat-name">Data Science & ML</div><div class="cat-count">38,620 jobs</div></div>
+      <div class="cat-card" onclick="bc('Cybersecurity')"><div class="cat-icon" style="background:rgba(255,107,107,.1)">🔐</div><div class="cat-name">Cybersecurity</div><div class="cat-count">21,440 jobs</div></div>
+      <div class="cat-card" onclick="bc('Photography')"><div class="cat-icon" style="background:rgba(255,209,102,.1)">📷</div><div class="cat-name">Photography</div><div class="cat-count">18,900 jobs</div></div>
+    </div>
+  </section>
+  <section class="content-section reveal" style="background:#f0f2ff">
+    <div class="section-header">
+      <div><div class="section-label">Opportunities</div><div class="section-title">Featured Jobs</div><p class="section-sub">Hand-picked opportunities from top companies.</p></div>
+      <a href="#" class="view-all" onclick="showPage('browse');return false;">Browse All Jobs →</a>
+    </div>
+    <div class="jobs-grid" id="homeJobsGrid"></div>
+  </section>
+  <section class="content-section reveal">
+    <div class="section-header">
+      <div><div class="section-label">Talent</div><div class="section-title">Top Rated Freelancers</div><p class="section-sub">Work with the world's best — verified and ready.</p></div>
+      <a href="#" class="view-all">Explore All Talent →</a>
+    </div>
+    <div class="freelancers-grid">
+      <div class="freelancer-card"><div class="avatar" style="background:rgba(0,229,160,.12)">👨‍💻</div><div class="fl-name">Alex Rivera</div><div class="fl-role">Full-Stack Developer</div><div class="fl-rating"><span class="stars">★★★★★</span><span class="rating-val">5.0 (248)</span></div><div class="fl-rate">$95<span>/hr</span></div><button class="hire-btn">View Profile</button></div>
+      <div class="freelancer-card"><div class="avatar" style="background:rgba(108,99,255,.12)">👩‍🎨</div><div class="fl-name">Priya Sharma</div><div class="fl-role">UI/UX Designer</div><div class="fl-rating"><span class="stars">★★★★★</span><span class="rating-val">4.9 (192)</span></div><div class="fl-rate">$85<span>/hr</span></div><button class="hire-btn">View Profile</button></div>
+      <div class="freelancer-card"><div class="avatar" style="background:rgba(255,107,107,.12)">🧑‍🔬</div><div class="fl-name">Jordan Chen</div><div class="fl-role">ML / AI Engineer</div><div class="fl-rating"><span class="stars">★★★★★</span><span class="rating-val">5.0 (134)</span></div><div class="fl-rate">$130<span>/hr</span></div><button class="hire-btn">View Profile</button></div>
+      <div class="freelancer-card"><div class="avatar" style="background:rgba(255,209,102,.12)">👩‍💼</div><div class="fl-name">Sofia Martinez</div><div class="fl-role">Brand Strategist</div><div class="fl-rating"><span class="stars">★★★★★</span><span class="rating-val">4.8 (317)</span></div><div class="fl-rate">$75<span>/hr</span></div><button class="hire-btn">View Profile</button></div>
+    </div>
+  </section>
+  <section class="content-section reveal" style="background:#f0f2ff">
+    <div style="text-align:center;max-width:540px;margin:0 auto">
+      <div class="section-label">Process</div><div class="section-title">How Freelancer Works</div>
+      <p class="section-sub" style="margin:10px auto 0">Get started in minutes — whether hiring or finding work.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Create Your Profile</div><p class="step-desc">Sign up free and showcase your skills, portfolio, and experience.</p></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Browse & Apply</div><p class="step-desc">Search thousands of jobs or get AI-matched project suggestions.</p></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Collaborate & Deliver</div><p class="step-desc">Use our workspace with messaging, file sharing, and milestones.</p></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Get Paid Securely</div><p class="step-desc">Escrow payments protect you. Funds released when you deliver.</p></div>
+    </div>
+  </section>
+  <section class="cta-section reveal">
+    <div class="cta-inner">
+      <div class="section-label" style="text-align:center">Ready?</div>
+      <div class="section-title" style="font-size:clamp(1.7rem,3.2vw,2.8rem)">Start Your Journey Today</div>
+      <p class="section-sub" style="margin:12px auto 0">Join 2M+ freelancers and 50K+ companies already on the platform.</p>
+      <div class="cta-btns">
+        <button class="btn-lg primary" onclick="showPage('browse')">Find Your Next Project →</button>
+        <button class="btn-lg outline" onclick="openModal('signup')">Hire Top Talent</button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo" style="display:block">freelancer<span class="logo-dot">.</span></span>
+        <p>The world's largest marketplace connecting talented freelancers with businesses seeking exceptional work.</p>
+      </div>
+      <div class="footer-col"><h4>For Freelancers</h4><ul><li><a href="#" onclick="showPage('browse');return false">Find Work</a></li><li><a href="#" onclick="openModal('signup');return false">Create Profile</a></li><li><a href="https://www.coursera.org" target="_blank">Skill Tests</a></li><li><a href="https://www.udemy.com" target="_blank">Learning Hub</a></li><li><a href="https://www.payoneer.com" target="_blank">Earnings</a></li></ul></div>
+      <div class="footer-col"><h4>For Clients</h4><ul><li><a href="https://www.linkedin.com/jobs" target="_blank">Post a Job</a></li><li><a href="#" onclick="showPage('browse');return false">Browse Talent</a></li><li><a href="https://www.upwork.com/enterprise" target="_blank">Enterprise</a></li><li><a href="https://www.toptal.com" target="_blank">Managed Services</a></li><li><a href="https://www.freelancer.com/membership" target="_blank">Pricing</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="https://www.freelancer.com/about" target="_blank">About Us</a></li><li><a href="https://www.freelancer.com/community/articles" target="_blank">Blog</a></li><li><a href="https://www.freelancer.com/about/press" target="_blank">Press</a></li><li><a href="https://www.freelancer.com/jobs" target="_blank">Careers</a></li><li><a href="https://www.freelancer.com/support" target="_blank">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Freelancer. All rights reserved.</span>
+      <div class="social-links"><a class="social-link" href="https://twitter.com/freelancer" target="_blank">𝕏</a><a class="social-link" href="https://www.linkedin.com/company/freelancer-com" target="_blank">in</a><a class="social-link" href="https://www.instagram.com/freelancercom" target="_blank">ig</a><a class="social-link" href="https://www.youtube.com/@FreelancerCom" target="_blank">yt</a></div>
+      <span>Privacy · Terms · Cookies</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ========== PAGE: BROWSE ========== -->
+<div class="page" id="page-browse">
+  <div class="browse-page">
+    <div class="browse-header">
+      <a href="#" class="apply-back" onclick="showPage('home');return false;">← Back to Home</a>
+      <h1>Browse Jobs</h1>
+      <p>Explore <strong id="totalCount">2,847</strong> open positions across all categories</p>
+      <div class="search-bar" style="max-width:620px;margin:20px 0 0 0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7a7a8c" stroke-width="2" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Job title, skill, or keyword…" id="browseQ" style="margin-left:10px" onkeyup="filterJobs()">
+        <div class="search-divider"></div>
+        <select class="search-cat" id="browseCat" onchange="filterJobs()">
+          <option value="">All Categories</option>
+          <option>Development & IT</option>
+          <option>Design & Creative</option>
+          <option>Writing & Translation</option>
+          <option>Digital Marketing</option>
+          <option>Data Science & ML</option>
+          <option>Video & Animation</option>
+          <option>Cybersecurity</option>
+        </select>
+        <button class="search-btn" onclick="filterJobs()">Filter Results</button>
+      </div>
+    </div>
+    <div class="browse-layout">
+      <aside class="filter-panel">
+        <h3>Filters <button class="filter-reset" onclick="resetFilters()">Reset all</button></h3>
+        <div class="filter-section">
+          <h4>Job Type</h4>
+          <div class="filter-option"><input type="checkbox" id="ft1" checked onchange="filterJobs()"><label for="ft1">Full-time</label><span class="count">1,240</span></div>
+          <div class="filter-option"><input type="checkbox" id="ft2" checked onchange="filterJobs()"><label for="ft2">Part-time</label><span class="count">584</span></div>
+          <div class="filter-option"><input type="checkbox" id="ft3" checked onchange="filterJobs()"><label for="ft3">Contract</label><span class="count">738</span></div>
+          <div class="filter-option"><input type="checkbox" id="ft4" checked onchange="filterJobs()"><label for="ft4">Freelance</label><span class="count">285</span></div>
+        </div>
+        <div class="filter-section">
+          <h4>Location</h4>
+          <div class="filter-option"><input type="checkbox" id="loc1" checked onchange="filterJobs()"><label for="loc1">Remote</label><span class="count">1,820</span></div>
+          <div class="filter-option"><input type="checkbox" id="loc2" checked onchange="filterJobs()"><label for="loc2">On-site</label><span class="count">642</span></div>
+          <div class="filter-option"><input type="checkbox" id="loc3" checked onchange="filterJobs()"><label for="loc3">Hybrid</label><span class="count">385</span></div>
+        </div>
+        <div class="filter-section">
+          <h4>Experience Level</h4>
+          <div class="filter-option"><input type="checkbox" id="exp1" onchange="filterJobs()"><label for="exp1">Entry Level</label><span class="count">420</span></div>
+          <div class="filter-option"><input type="checkbox" id="exp2" checked onchange="filterJobs()"><label for="exp2">Mid Level</label><span class="count">1,100</span></div>
+          <div class="filter-option"><input type="checkbox" id="exp3" checked onchange="filterJobs()"><label for="exp3">Senior Level</label><span class="count">890</span></div>
+          <div class="filter-option"><input type="checkbox" id="exp4" onchange="filterJobs()"><label for="exp4">Lead / Manager</label><span class="count">437</span></div>
+        </div>
+        <div class="filter-section">
+          <h4>Max Salary ($/hr)</h4>
+          <input type="range" class="range-slider" min="10" max="300" value="300" id="salaryRange" oninput="document.getElementById('salaryLabel').textContent='Up to $'+this.value+'/hr'">
+          <div class="range-labels"><span>$10</span><span id="salaryLabel">Up to $300/hr</span><span>$300</span></div>
+        </div>
+        <div class="filter-section">
+          <h4>Company Size</h4>
+          <div class="filter-option"><input type="checkbox" id="cs1" checked onchange="filterJobs()"><label for="cs1">Startup (1–50)</label><span class="count">384</span></div>
+          <div class="filter-option"><input type="checkbox" id="cs2" checked onchange="filterJobs()"><label for="cs2">SMB (51–500)</label><span class="count">720</span></div>
+          <div class="filter-option"><input type="checkbox" id="cs3" checked onchange="filterJobs()"><label for="cs3">Enterprise (500+)</label><span class="count">1,040</span></div>
+        </div>
+        <button class="form-btn" onclick="filterJobs()" style="padding:11px;margin-top:4px">Apply Filters</button>
+      </aside>
+      <div>
+        <div class="results-bar">
+          <div class="results-count" id="resultsCount">Showing 12 of 2,847 jobs</div>
+          <div class="results-sort">Sort by: <select><option>Most Relevant</option><option>Newest First</option><option>Salary: High to Low</option><option>Salary: Low to High</option></select></div>
+        </div>
+        <div class="jobs-results" id="jobsResults"></div>
+        <div class="pagination">
+          <button class="page-btn pg-active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">…</button>
+          <button class="page-btn">48</button>
+          <button class="page-btn">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PAGE: CATEGORIES ========== -->
+<div class="page" id="page-categories">
+  <div class="all-cats-page">
+    <a href="#" class="apply-back" onclick="showPage('home');return false;">← Back to Home</a>
+    <div class="all-cats-header">
+      <div class="section-label">All Categories</div>
+      <h1>Explore Every Field</h1>
+      <p style="color:var(--muted);font-size:.93rem">Find work in 50+ professional categories</p>
+    </div>
+    <div class="all-cats-grid" id="allCatsGrid"></div>
+  </div>
+</div>
+
+<!-- ========== PAGE: APPLY ========== -->
+<div class="page" id="page-apply">
+  <div class="apply-page">
+    <div class="apply-page-inner">
+      <a href="#" class="apply-back" id="applyBackLink" onclick="showPage('browse');return false;">← Back to Jobs</a>
+      <div class="apply-layout">
+        <div class="apply-main" id="applyContent"></div>
+        <div class="apply-sidebar-col">
+          <div class="apply-form-card">
+            <h3>Apply for this Position</h3>
+            <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name" id="applyName"></div>
+            <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com" id="applyEmail"></div>
+            <div class="form-group"><label>Phone (optional)</label><input type="text" placeholder="+1 (555) 000-0000"></div>
+            <div class="form-group"><label>Portfolio / LinkedIn</label><input type="text" placeholder="https://..."></div>
+            <div class="form-group"><label>Expected Rate / Salary</label><input type="text" placeholder="e.g. $95/hr or $120K/yr"></div>
+            <div class="form-group"><label>Cover Letter</label><textarea placeholder="Tell us why you're the perfect fit for this role…"></textarea></div>
+            <div class="form-group">
+              <label>Resume / CV</label>
+              <div class="upload-box">📄 Drag & drop or <span>browse files</span><br><small style="font-size:.72rem;margin-top:4px;display:block">PDF, DOC, DOCX up to 10MB</small></div>
+            </div>
+            <button class="apply-submit" onclick="doSubmitApply()">Submit & Go to Company Site →</button>
+            <p class="apply-note">🔒 Your info is encrypted and shared only with this employer.</p>
+          </div>
+          <div id="similarJobsPanel"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
